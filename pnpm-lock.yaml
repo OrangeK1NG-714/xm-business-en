@@ -26,6 +26,9 @@ importers:
       '@ant-design/icons':
         specifier: ^6.2.2
         version: 6.2.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@en/common':
+        specifier: workspace:^
+        version: link:../../packages/common
       '@en/config':
         specifier: workspace:^
         version: link:../../packages/config
@@ -121,6 +124,9 @@ importers:
 
   server:
     dependencies:
+      '@en/common':
+        specifier: workspace:^
+        version: link:../packages/common
       '@en/config':
         specifier: workspace:^
         version: link:../packages/config

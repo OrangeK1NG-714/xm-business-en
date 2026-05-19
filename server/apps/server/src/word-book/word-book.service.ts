@@ -8,6 +8,11 @@ export class WordBookService {
     private readonly prismaService: PrismaService,
   ) {}
   findAll(query: WordQuery) {
+    const { page = 1, pageSize = 12, word, ...rest } = query;
+    console.log(rest);
+    Object.entries(rest).map(([key, value]) => {
+      console.log(key, value);
+    });
     return this.responseService.success(`ceshi`);
   }
 }

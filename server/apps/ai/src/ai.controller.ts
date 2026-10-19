@@ -6,7 +6,7 @@ export class AiController {
   constructor(private readonly aiService: AiService) {}
 
   @Get()
-  getHello(): string {
+  getHello() {
     return this.aiService.getHello();
   }
 }

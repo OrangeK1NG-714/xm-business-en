@@ -1,0 +1,18 @@
+### 跟课程一致：提交前先计算 MD5，以下 password 是 123456 的 MD5
+POST http://localhost:6001/api/v1/user/register
+Content-Type: application/json
+
+{
+  "name": "学习者",
+  "phone": "13800138000",
+  "password": "e10adc3949ba59abbe56e057f20f883e"
+}
+
+###
+POST http://localhost:6001/api/v1/user/login
+Content-Type: application/json
+
+{
+  "phone": "13800138000",
+  "password": "e10adc3949ba59abbe56e057f20f883e"
+}

@@ -7,6 +7,11 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
+    "build:all": "nest build server && nest build ai",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "db:seed:demo": "ts-node --project tsconfig.seed.json prisma/seed.ts",
+    "db:import:words": "ts-node --project tsconfig.seed.json prisma/import-words.ts",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -23,7 +28,9 @@
     "@en/common": "workspace:^",
     "@en/config": "workspace:^",
     "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^12.0.1",
     "@nestjs/core": "^11.0.1",
+    "@nestjs/jwt": "^12.0.2",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^11.0.1",
     "@prisma/adapter-pg": "^7.8.0",
@@ -67,18 +74,34 @@
     "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+      "^.+\\.(t|j)s$": [
+        "ts-jest",
+        {
+          "tsconfig": {
+            "module": "CommonJS",
+            "moduleResolution": "Node",
+            "allowJs": true,
+            "resolvePackageJsonExports": false
+          }
+        }
+      ]
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!.*@nestjs(?:/|\\+)(?:jwt|config))"
     ],
     "coverageDirectory": "./coverage",
     "testEnvironment": "node",
     "roots": [
       "<rootDir>/apps/",
+      "<rootDir>/prisma/",
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
+      "^@en/config$": "<rootDir>/../packages/config/index.ts",
+      "^(\\.{1,2}/.*)\\.js$": "$1",
       "^@libs/shared(|/.*)$": "<rootDir>/libs/shared/src/$1"
     }
   }

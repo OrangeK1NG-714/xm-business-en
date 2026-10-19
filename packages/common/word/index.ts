@@ -14,8 +14,8 @@ export type Word = {
     gk?: boolean; // 高考
     zk?: boolean; // 中考
     gre?: boolean; // GRE
-    toefl?: boolean; // TOEFL 
-    ielts?: boolean; // IELTS 
+    toefl?: boolean; // TOEFL
+    ielts?: boolean; // IELTS
     cet6?: boolean; // 大学英语六级
     cet4?: boolean; // 大学英语四级
     ky?: boolean; // 考研

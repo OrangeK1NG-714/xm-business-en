@@ -1,0 +1,18 @@
+.model-scene { position: relative; min-height: 220px; width: 100%; overflow: hidden; color: inherit; }
+.model-scene-canvas { display: block; width: 100%; height: 100%; position: absolute; inset: 0; opacity: 0; transition: opacity .5s; cursor: grab; touch-action: pan-y; }
+.model-scene-canvas:active { cursor: grabbing; }
+.model-scene-canvas.model-scene-ready { opacity: 1; }
+.model-scene-status { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 14px; color: inherit; opacity: .65; font-size: 11px; letter-spacing: 1px; }
+.model-scene-spinner { width: 25px; height: 25px; border: 1px solid currentColor; border-top-color: transparent; border-right-color: transparent; border-radius: 50%; animation: model-scene-spin 1.2s linear infinite; }
+.model-scene-fallback { font-family: Georgia, 'Times New Roman', serif; font-size: 70px; opacity: .55; font-style: italic; }
+.model-scene-status button { border: 1px solid currentColor; border-radius: 5px; padding: 5px 12px; color: inherit; background: transparent; cursor: pointer; font-size: 11px; }
+.model-scene-status button:hover { opacity: .7; }
+.model-scene-credit { position: absolute; bottom: 9px; left: 12px; font-size: 9px; color: inherit; z-index: 3; max-width: calc(100% - 24px); }
+.model-scene-credit summary { cursor: pointer; opacity: .55; list-style: none; text-align: right; }
+.model-scene-credit summary::-webkit-details-marker { display: none; }
+.model-scene-credit summary:hover { opacity: 1; }
+.model-scene-credit p { margin: 6px 0 0; padding: 10px; line-height: 1.7; max-width: 280px; border-radius: 5px; color: #d7e5df; background: #16363cf2; box-shadow: 0 5px 20px #0002; }
+.model-scene-credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.model-scene button:focus-visible, .model-scene summary:focus-visible, .model-scene a:focus-visible { outline: 2px solid #80bca7; outline-offset: 3px; }
+@keyframes model-scene-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .model-scene-canvas { transition: none; } .model-scene-spinner { animation: none; } }

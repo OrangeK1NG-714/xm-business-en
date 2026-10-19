@@ -1,0 +1,14 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { App as AntApp, ConfigProvider } from 'antd';
+import zhCN from 'antd/locale/zh_CN';
+import { BrowserRouter } from 'react-router-dom';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import App from './App';
+import './styles.css';
+dayjs.extend(utc); dayjs.extend(timezone); dayjs.extend(relativeTime); dayjs.locale('zh-cn'); dayjs.tz.setDefault('Asia/Shanghai');
+ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><ConfigProvider locale={zhCN} theme={{ token: { colorPrimary: '#285a46', colorInfo: '#285a46', colorSuccess: '#4a7c5d', colorBgLayout: '#f5f6f2', borderRadius: 8, fontFamily: '"Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif', fontSize: 14, colorText: '#263d33', colorTextSecondary: '#7b877d', controlHeight: 36 }, components: { Button: { primaryShadow: 'none', defaultShadow: 'none' }, Table: { headerBg: '#f8f9f5', headerColor: '#7b877d', rowHoverBg: '#fafbf8', cellPaddingBlock: 19 }, Modal: { borderRadiusLG: 14 } } }}><AntApp><BrowserRouter><App /></BrowserRouter></AntApp></ConfigProvider></React.StrictMode>);

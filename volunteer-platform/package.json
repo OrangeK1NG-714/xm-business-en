@@ -1,0 +1,16 @@
+{
+  "name": "volunteer-platform",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.1.2",
+  "engines": { "node": ">=24.0.0" },
+  "scripts": {
+    "dev": "concurrently -n api,worker,admin -c green,cyan,yellow \"pnpm --filter @volunteer/server dev\" \"pnpm --filter @volunteer/server dev:worker\" \"pnpm --filter @volunteer/admin dev\"",
+    "build": "pnpm --filter @volunteer/server build && pnpm --filter @volunteer/admin build && pnpm --filter @volunteer/miniapp build:weapp",
+    "test": "pnpm --filter @volunteer/server test",
+    "db:generate": "pnpm --filter @volunteer/server db:generate",
+    "db:migrate": "pnpm --filter @volunteer/server db:migrate",
+    "db:seed": "pnpm --filter @volunteer/server db:seed"
+  },
+  "devDependencies": { "concurrently": "^9.2.1" }
+}

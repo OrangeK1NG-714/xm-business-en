@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "ts-node": {
+    "experimentalResolver": true
+  },
+  "include": ["prisma/*.ts"]
+}

@@ -1,3 +1,5 @@
+本项目的启动、数据库准备和 API 契约见 [DEVELOPMENT.md](./DEVELOPMENT.md)。
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>

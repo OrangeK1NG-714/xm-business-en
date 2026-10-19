@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client"
+  output = "../src/generated/prisma"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id String @id @default(cuid())
+  name String
+  number String @unique
+  department String
+  phone String
+  username String? @unique
+  passwordHash String?
+  role String @default("VOLUNTEER")
+  createdAt DateTime @default(now())
+  applications Application[]
+}
+
+model Activity {
+  id String @id @default(cuid())
+  title String
+  category String
+  description String
+  location String
+  contactName String
+  status String @default("DRAFT")
+  color String @default("green")
+  source String @default("LOCAL")
+  externalId String? @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  sessions ActivitySession[]
+}
+
+model ActivitySession {
+  id String @id @default(cuid())
+  activityId String
+  activity Activity @relation(fields: [activityId], references: [id])
+  title String
+  startsAt DateTime
+  endsAt DateTime
+  registrationEndsAt DateTime
+  capacity Int
+  defaultMinutes Int
+  createdAt DateTime @default(now())
+  applications Application[]
+  @@index([startsAt])
+}
+
+model Application {
+  id String @id @default(cuid())
+  sessionId String
+  session ActivitySession @relation(fields: [sessionId], references: [id])
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  status String @default("PENDING")
+  attendance String @default("UNRECORDED")
+  reviewVersion Int @default(0)
+  reviewReason String?
+  reviewedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  source String @default("LOCAL")
+  externalId String? @unique
+  notifications Notification[]
+  serviceRecords ServiceRecord[]
+  @@unique([sessionId, userId])
+  @@index([status, createdAt])
+}
+
+model ServiceRecord {
+  id String @id @default(cuid())
+  applicationId String
+  application Application @relation(fields: [applicationId], references: [id])
+  serviceDate String
+  minutes Int
+  status String @default("CONFIRMED")
+  confirmedBy String
+  updatedAt DateTime @updatedAt
+  @@unique([applicationId, serviceDate])
+  @@index([serviceDate, status])
+}
+
+model Notification {
+  id String @id @default(cuid())
+  applicationId String
+  application Application @relation(fields: [applicationId], references: [id])
+  eventKey String @unique
+  type String @default("APPLICATION_APPROVED")
+  phone String
+  parameters Json
+  status String @default("PENDING")
+  providerMessageId String?
+  error String?
+  sentAt DateTime?
+  attempts Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  logs NotificationAttempt[]
+  @@index([status, createdAt])
+}
+
+model NotificationAttempt {
+  id String @id @default(cuid())
+  notificationId String
+  notification Notification @relation(fields: [notificationId], references: [id])
+  status String
+  detail String?
+  createdAt DateTime @default(now())
+}
+
+model ExportJob {
+  id String @id @default(cuid())
+  createdBy String
+  filters Json
+  status String @default("PENDING")
+  fileName String?
+  filePath String?
+  rowCount Int?
+  error String?
+  createdAt DateTime @default(now())
+  completedAt DateTime?
+}
+
+model AuditLog {
+  id String @id @default(cuid())
+  actorId String
+  action String
+  targetId String
+  detail Json
+  createdAt DateTime @default(now())
+  @@index([createdAt])
+}

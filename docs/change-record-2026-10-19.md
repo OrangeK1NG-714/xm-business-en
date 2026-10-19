@@ -4,6 +4,8 @@
 - 工作分支：`codex/save-project-work-20261019`
 - 合并目标：`master`
 - 起始提交：`7b14ca3c8bda74052b20d2ece7b1b05cb1ddbf37`
+- 功能提交：[`a31d1e1f4a2d6010358052a45e1bf5dae42b66b4`](https://github.com/OrangeK1NG-714/xm-business-en/commit/a31d1e1f4a2d6010358052a45e1bf5dae42b66b4)
+- Pull Request：[#1](https://github.com/OrangeK1NG-714/xm-business-en/pull/1)
 - 保存方式：提交当前工作，通过 GitHub PR 使用 merge commit 合并，保留功能提交和合并节点。
 
 ## 保存内容
@@ -35,4 +37,4 @@
 
 两处 Web 构建有打包体积提示，不影响构建成功。本次未执行数据库迁移、真实短信发送或数据库端到端联调；志愿小程序尚未包含在本次代码中。
 
-实际 `.env`、依赖目录和构建产物由现有忽略规则排除，环境示例和模型原始许可随代码保存。PR 链接与功能提交标识在创建后补记；合并节点可在 GitHub PR 时间线与 `master` 的 Git 历史中查询。
+实际 `.env`、依赖目录和构建产物由现有忽略规则排除，环境示例和模型原始许可随代码保存。合并节点与最终状态可在上述 GitHub PR 时间线和 `master` 的 Git 历史中查询。
